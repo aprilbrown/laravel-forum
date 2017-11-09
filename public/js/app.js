@@ -793,7 +793,7 @@ window.Vue = __webpack_require__(35);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
+ * the page. Then, you may begin adding views to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
@@ -31218,7 +31218,7 @@ module.exports = (
     var originURL;
 
     /**
-    * Parse a URL to discover it's components
+    * Parse a URL to discover it's views
     *
     * @param {String} url The URL to be parsed
     * @returns {Object}
@@ -33682,11 +33682,11 @@ function checkProp (
 // generated render function is guaranteed to return Array<VNode>. There are
 // two cases where extra normalization is needed:
 
-// 1. When the children contains components - because a functional component
+// 1. When the children contains views - because a functional component
 // may return an Array instead of a single root. In this case, just a simple
 // normalization is needed - if any child is an Array, we flatten the whole
 // thing with Array.prototype.concat. It is guaranteed to be only 1-level deep
-// because functional components already normalize their own children.
+// because functional views already normalize their own children.
 function simpleNormalizeChildren (children) {
   for (var i = 0; i < children.length; i++) {
     if (Array.isArray(children[i])) {
@@ -34276,7 +34276,7 @@ function mountComponent (
   hydrating = false;
 
   // manually mounted instance, call mounted on self
-  // mounted is called for render-created child components in its inserted hook
+  // mounted is called for render-created child views in its inserted hook
   if (vm.$vnode == null) {
     vm._isMounted = true;
     callHook(vm, 'mounted');
@@ -34889,7 +34889,7 @@ function initData (vm) {
     data = {};
     "development" !== 'production' && warn(
       'data functions should return an object:\n' +
-      'https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function',
+      'https://vuejs.org/v2/guide/views.html#data-Must-Be-a-Function',
       vm
     );
   }
@@ -35211,7 +35211,7 @@ function createFunctionalComponent (
     if (isDef(data.attrs)) { mergeProps(props, data.attrs); }
     if (isDef(data.props)) { mergeProps(props, data.props); }
   }
-  // ensure the createElement function in functional components
+  // ensure the createElement function in functional views
   // gets a unique context - this is necessary for correct named slot check
   var _context = Object.create(context);
   var h = function (a, b, c, d) { return createElement(_context, a, b, c, d, true); };
@@ -35259,7 +35259,7 @@ var componentVNodeHooks = {
       );
       child.$mount(hydrating ? vnode.elm : undefined, hydrating);
     } else if (vnode.data.keepAlive) {
-      // kept-alive components, treat as a patch
+      // kept-alive views, treat as a patch
       var mountedNode = vnode; // work around flow
       componentVNodeHooks.prepatch(mountedNode, mountedNode);
     }
@@ -35287,7 +35287,7 @@ var componentVNodeHooks = {
     if (vnode.data.keepAlive) {
       if (context._isMounted) {
         // vue-router#1212
-        // During updates, a kept-alive component's child components may
+        // During updates, a kept-alive component's child views may
         // change, so directly walking the tree here may call activated hooks
         // on incorrect children. Instead we push them into a queue which will
         // be processed after the whole patch process ended.
@@ -35385,7 +35385,7 @@ function createComponent (
   data.on = data.nativeOn;
 
   if (isTrue(Ctor.options.abstract)) {
-    // abstract components do not keep anything
+    // abstract views do not keep anything
     // other than props & listeners & slot
 
     // work around flow
@@ -36341,7 +36341,7 @@ var KeepAlive = {
         return vnode
       }
       var key = vnode.key == null
-        // same constructor may get registered as different local components
+        // same constructor may get registered as different local views
         // so cid alone is not enough (#3269)
         ? componentOptions.Ctor.cid + (componentOptions.tag ? ("::" + (componentOptions.tag)) : '')
         : vnode.key;
@@ -36395,7 +36395,7 @@ function initGlobalAPI (Vue) {
   });
 
   // this is used to identify the "base" constructor to extend all plain-object
-  // components with in Weex's multi-instance scenarios.
+  // views with in Weex's multi-instance scenarios.
   Vue.options._base = Vue;
 
   extend(Vue.options.components, builtInComponents);
@@ -36869,7 +36869,7 @@ function createPatchFunction (backend) {
         ) {
           warn(
             'Unknown custom element: <' + tag + '> - did you ' +
-            'register the component correctly? For recursive components, ' +
+            'register the component correctly? For recursive views, ' +
             'make sure to provide the "name" option.',
             vnode.context
           );
@@ -39413,7 +39413,7 @@ var Transition = {
     }
 
     // apply transition data to child
-    // use getRealChild() to ignore abstract components e.g. keep-alive
+    // use getRealChild() to ignore abstract views e.g. keep-alive
     var child = getRealChild(rawChild);
     /* istanbul ignore if */
     if (!child) {
@@ -39662,7 +39662,7 @@ Vue$3.config.isReservedAttr = isReservedAttr;
 Vue$3.config.getTagNamespace = getTagNamespace;
 Vue$3.config.isUnknownElement = isUnknownElement;
 
-// install platform runtime directives & components
+// install platform runtime directives & views
 extend(Vue$3.options.directives, platformDirectives);
 extend(Vue$3.options.components, platformComponents);
 
@@ -40852,7 +40852,7 @@ function markStatic$1 (node) {
   node.static = isStatic(node);
   if (node.type === 1) {
     // do not make component slot content static. this avoids
-    // 1. components not able to mutate slot nodes
+    // 1. views not able to mutate slot nodes
     // 2. static slot content fails for hot-reloading
     if (
       !isPlatformReservedTag(node.tag) &&
@@ -41273,7 +41273,7 @@ function genData$2 (el, state) {
   if (el.pre) {
     data += "pre:true,";
   }
-  // record original tag name for components using "is" attribute
+  // record original tag name for views using "is" attribute
   if (el.component) {
     data += "tag:\"" + (el.tag) + "\",";
   }
@@ -41357,7 +41357,7 @@ function genInlineTemplate (el, state) {
   if ("development" !== 'production' && (
     el.children.length > 1 || ast.type !== 1
   )) {
-    state.warn('Inline-template components must have exactly one child element.');
+    state.warn('Inline-template views must have exactly one child element.');
   }
   if (ast.type === 1) {
     var inlineRenderFns = generate(ast, state.options);
@@ -41893,21 +41893,27 @@ module.exports = Vue$3;
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(37)(
-  /* script */
-  __webpack_require__(38),
-  /* template */
-  __webpack_require__(39),
-  /* styles */
-  null,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
+var normalizeComponent = __webpack_require__(37)
+/* script */
+var __vue_script__ = __webpack_require__(38)
+/* template */
+var __vue_template__ = __webpack_require__(39)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
 )
-Component.options.__file = "/home/vagrant/code/myproject/resources/assets/js/components/Example.vue"
+Component.options.__file = "resources\\assets\\js\\views\\Home.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Home.vue: functional views are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -41916,9 +41922,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-24200c65", Component.options)
+    hotAPI.createRecord("data-v-fdf4d776", Component.options)
   } else {
-    hotAPI.reload("data-v-24200c65", Component.options)
+    hotAPI.reload("data-v-fdf4d776", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -42058,28 +42064,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
   return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-8 col-md-offset-2"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Example Component")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_vm._v("\n                    I'm an example component!\n                ")])])])])])
-}]}
-module.exports.render._withStripped = true
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+          _c("div", { staticClass: "panel panel-default" }, [
+            _c("div", { staticClass: "panel-heading" }, [
+              _vm._v("Example Component")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "panel-body" }, [
+              _vm._v(
+                "\n                    I'm an example component!\n                "
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-24200c65", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-fdf4d776", module.exports)
   }
 }
 
