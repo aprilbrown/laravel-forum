@@ -7,13 +7,15 @@
                         {{ $reply->owner->name }}
                     </a> said {{ $reply->created_at->diffForHumans() }}...
                 </h5>
-    
-                <div>
-                    <favorite :reply="{{ $reply }}"></favorite>
-                </div>
+
+                @if (Auth::check())
+                    <div>
+                        <favorite :reply="{{ $reply }}"></favorite>
+                    </div>
+                @endif
             </div>
         </div>
-    
+
         <div class="panel-body">
             <div v-if="editing">
                 <div class="form-group">
@@ -26,14 +28,12 @@
 
             <div v-else v-text="body"></div>
         </div>
-    
+
         @can ('update', $reply)
             <div class="panel-footer level">
-    
                 <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
                 <button class="btn btn-xs btn-danger mr-1" @click="destroy">Delete</button>
             </div>
         @endcan
-    
     </div>
 </reply>
