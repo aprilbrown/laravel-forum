@@ -1,4 +1,5 @@
 <script>
+    import Favorite from './Favorite.vue';
     export default {
         props: ['attributes'],
         data() {
@@ -7,6 +8,7 @@
                 body: this.attributes.body
             };
         },
+        components: { Favorite },
         methods: {
             update(){
                 axios.patch('/replies/' + this.attributes.id, {
