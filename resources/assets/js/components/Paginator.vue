@@ -30,7 +30,7 @@
                 this.nextUrl = this.dataSet.next_page_url;
             },
             page() {
-                this.broadcast();
+                this.broadcast().updateUrl();
             }
         },
         computed: {
@@ -40,7 +40,10 @@
         },
         methods: {
             broadcast() {
-                this.$emit('updated', this.page);
+                return this.$emit('changed', this.page);
+            },
+            updateUrl() {
+                history.pushState(null, null, '?page=' + this.page);
             }
         }
     }
