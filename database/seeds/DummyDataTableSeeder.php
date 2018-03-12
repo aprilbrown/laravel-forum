@@ -87,7 +87,7 @@ class DummyDataTableSeeder extends Seeder
             ]);
         }
 
-        $other_threads = factory('App\Thread', 5)->create();
+        $other_threads = factory('App\Thread', 3)->create();
 
         foreach($other_threads as $thread){
             DB::table('activities')->insert([
@@ -110,5 +110,8 @@ class DummyDataTableSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ]);
         }
+
+        $noreplies = factory('App\Thread', 3)->create();
+
     }
 }
