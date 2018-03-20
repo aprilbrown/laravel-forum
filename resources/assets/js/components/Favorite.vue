@@ -17,7 +17,7 @@
         computed: {
             classes() {
                 return [
-                    'btn', 
+                    'btn',
                     this.active ? 'btn-primary' : 'btn-default'
                 ];
             },
@@ -32,7 +32,7 @@
             create() {
                 axios.post(this.endpoint);
 
-                this.active = true; 
+                this.active = true;
                 this.count++;
             },
             destroy() {
@@ -42,6 +42,6 @@
                 this.count--;
             }
         }
-        
+
     }
 </script>
