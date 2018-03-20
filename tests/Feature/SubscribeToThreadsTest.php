@@ -28,7 +28,6 @@ class SubscribeToThreadsTest extends TestCase
     /** @test */
     public function a_user_can_unsubscribe_from_threads()
     {
-        // TODO: 13:50
         $this->signIn();
 
         $thread = create('App\Thread');
