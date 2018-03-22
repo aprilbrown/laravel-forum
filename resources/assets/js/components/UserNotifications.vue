@@ -12,7 +12,6 @@
 </template>
 
 <script>
-//TODO: 03:38
     export default {
         data() {
             return { notifications: false }
