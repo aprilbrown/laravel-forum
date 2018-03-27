@@ -110,7 +110,7 @@ class ThreadTest extends TestCase
     {
         $this->signIn();
         $thread = $this->thread;
-//TODO: 12:20
+
         tap(auth()->user(), function($user) use ($thread) {
             $this->assertTrue($this->thread->hasUpdatesFor($user));
 
