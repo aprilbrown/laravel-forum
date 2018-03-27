@@ -64,7 +64,7 @@ trait Favoritable
     {
         return $this->isFavorited();
     }
-    
+
     /**
      * Get the number of favorites for the reply.
      *

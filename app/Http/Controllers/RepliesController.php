@@ -15,7 +15,7 @@ class RepliesController extends Controller
     {
         return $thread->replies()->paginate(20);
     }
-    
+
     public function store($channelId, Thread $thread)
     {
         $this->validate(request(), [
@@ -37,7 +37,7 @@ class RepliesController extends Controller
     public function update(Reply $reply)
     {
         $this->authorize('update', $reply);
-        
+
         $reply->update(request(['body']));
     }
 
@@ -56,7 +56,7 @@ class RepliesController extends Controller
         if(request()->expectsJson()){
             return response(['status' => 'Reply Deleted']);
         }
-        
+
         return back();
     }
 }

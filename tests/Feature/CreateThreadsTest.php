@@ -72,7 +72,7 @@ class CreateThreadsTest extends TestCase
         $this->delete($thread->path())->assertRedirect('/login');
 
         $this->signIn();
-        
+
         $this->delete($thread->path())->assertStatus(403);
     }
 
@@ -98,9 +98,9 @@ class CreateThreadsTest extends TestCase
     public function publishThread($overrides = [])
     {
         $this->withExceptionHandling()->signIn();
-        
+
         $thread = make('App\Thread', $overrides);
-        
+
         return $this->post('/threads', $thread->toArray());
     }
 }

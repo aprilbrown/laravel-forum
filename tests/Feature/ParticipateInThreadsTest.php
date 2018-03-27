@@ -38,12 +38,12 @@ class ParticipateInThreadsTest extends TestCase
         $this->withExceptionHandling()->signIn();
 
         $thread = create('App\Thread');
-        
+
         $reply = make('App\Reply', ['body' => null]);
 
         $this->post($thread->path().'/replies', $reply->toArray())
             ->assertSessionHasErrors();
-        
+
         return back();
     }
 
@@ -70,7 +70,7 @@ class ParticipateInThreadsTest extends TestCase
         $reply = create('App\Reply', ['user_id' => auth()->id()]);
 
         $this->delete("/replies/{$reply->id}")->assertStatus(302);
-        
+
         $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
         $this->assertEquals(0, $reply->thread->fresh()->replies_count);
     }
