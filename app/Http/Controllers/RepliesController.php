@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Reply;
 use Exception;
 use App\Thread;
+use App\Inspections\Spam;
 
 class RepliesController extends Controller
 {
@@ -23,7 +24,7 @@ class RepliesController extends Controller
             'body' => 'required'
         ]);
 
-        $spam->detect();
+        $spam->detect(request('body'));
 
         $reply = $thread->addReply([
             'body' => request('body'),
