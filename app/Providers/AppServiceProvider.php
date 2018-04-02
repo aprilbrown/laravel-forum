@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
             });
             $view->with('channels', $channels);
         });
+
+        //TODO: For Laravel 5.5 use artisan make:rule RULENAME
+        \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');
     }
 
     /**
