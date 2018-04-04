@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Reply;
 use Exception;
 use App\Thread;
+use Illuminate\Support\Facades\Gate;
 
 class RepliesController extends Controller
 {
