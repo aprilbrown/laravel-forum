@@ -19,10 +19,13 @@ class RepliesController extends Controller
 
     public function store($channelId, Thread $thread)
     {
+        if(Gate::denies('create', new Reply)){
+            return response('You are posting too frequently. Please take a break. :)', 422);
+        }
+
         try{
             //TODO: For Laravel 5.5
             // request()->validate(['body' => 'required|spamfree']);
-
             $this->validate(request(), [
                 'body' => 'required|spamfree'
             ]);
