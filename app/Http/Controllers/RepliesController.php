@@ -1,60 +1,67 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
 use App\Reply;
-use Exception;
 use App\Thread;
-use Illuminate\Support\Facades\Gate;
 
 class RepliesController extends Controller
 {
+    /**
+     * Create a new RepliesController instance.
+     */
     public function __construct()
     {
         $this->middleware('auth', ['except' => 'index']);
     }
 
+    /**
+     * Fetch all relevant replies.
+     *
+     * @param int    $channelId
+     * @param Thread $thread
+     */
     public function index($channelId, Thread $thread)
     {
         return $thread->replies()->paginate(20);
     }
 
-    public function store($channelId, Thread $thread)
+    /**
+     * Persist a new reply.
+     *
+     * @param  integer           $channelId
+     * @param  Thread            $thread
+     * @param  CreatePostRequest $form
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function store($channelId, Thread $thread, CreatePostRequest $form)
     {
-        if(Gate::denies('create', new Reply)){
-            return response('You are posting too frequently. Please take a break. :)', 422);
-        }
-
-        try{
-            //TODO: For Laravel 5.5
-            // request()->validate(['body' => 'required|spamfree']);
-            $this->validate(request(), [
-                'body' => 'required|spamfree'
-            ]);
-
-            $reply = $thread->addReply([
-                'body' => request('body'),
-                'user_id' => auth()->id()
-            ]);
-        } catch (\Exception $e) {
-            return response('Sorry your reply could not be saved at this time.', 422);
-        }
-
-        return $reply->load('owner');
+        return $thread->addReply([
+            'body' => request('body'),
+            'user_id' => auth()->id()
+        ])->load('owner');
     }
 
+    /**
+     * Update an existing reply.
+     *
+     * @param Reply $reply
+     */
     public function update(Reply $reply)
     {
         $this->authorize('update', $reply);
 
-        try{
-            $this->validate(request(), [
-                'body' => 'required|spamfree'
-            ]);
+        try {
+            $this->validate(request(), ['body' => 'required|spamfree']);
 
             $reply->update(request(['body']));
         } catch (\Exception $e) {
-            return response('Sorry your reply could not be saved at this time.', 422);
+            return response(
+                'Sorry, your reply could not be saved at this time.', 422
+            );
         }
+
     }
 
     /**
@@ -69,8 +76,8 @@ class RepliesController extends Controller
 
         $reply->delete();
 
-        if(request()->expectsJson()){
-            return response(['status' => 'Reply Deleted']);
+        if (request()->expectsJson()) {
+            return response(['status' => 'Reply deleted']);
         }
 
         return back();
