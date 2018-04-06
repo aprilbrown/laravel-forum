@@ -15,7 +15,8 @@ class DummyDataTableSeeder extends Seeder
 
         $myuser = factory('App\User')->create([
             'name' => 'April Brown',
-            'email' => 'xmenrahne@hotmail.com',
+            'username' => 'WolfLoverApril',
+            'email' => 'wolfloverapril@gmail.com',
             'password' => bcrypt('test'),
         ]);
 
