@@ -59714,14 +59714,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         var _this = this;
 
-        axios.get('/profiles/' + window.App.user.name + '/notifications').then(function (response) {
+        axios.get('/profiles/' + window.App.user.username + '/notifications').then(function (response) {
             return _this.notifications = response.data;
         });
     },
 
     methods: {
         markAsRead: function markAsRead(notification) {
-            axios.delete('/profiles/' + window.App.user.name + '/notifications/' + notification.id);
+            axios.delete('/profiles/' + window.App.user.username + '/notifications/' + notification.id);
         }
     }
 });
@@ -60740,7 +60740,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             delay: 750,
             callbacks: {
                 remoteFilter: function remoteFilter(query, callback) {
-                    $.getJSON("/api/users", { name: query }, function (usernames) {
+                    $.getJSON("/api/users", { username: query }, function (usernames) {
                         callback(usernames);
                     });
                 }

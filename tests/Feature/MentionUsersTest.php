@@ -12,11 +12,11 @@ class MentionUsersTest extends TestCase
     /** @test */
     public function mentioned_users_in_a_reply_are_notified()
     {
-        $john = create('App\User', ['name' => 'JohnDoe']);
+        $john = create('App\User', ['username' => 'JohnDoe']);
 
         $this->signIn($john);
 
-        $jane = create('App\User', ['name' => 'JaneDoe']);
+        $jane = create('App\User', ['username' => 'JaneDoe']);
 
         $this->signIn($jane);
 
@@ -34,11 +34,11 @@ class MentionUsersTest extends TestCase
     /** @test */
     function it_can_fetch_all_mentioned_users_starting_with_the_given_characters()
     {
-        create('App\User', ['name' => 'johndoe']);
-        create('App\User', ['name' => 'johndoe2']);
-        create('App\User', ['name' => 'janedoe']);
+        create('App\User', ['username' => 'johndoe']);
+        create('App\User', ['username' => 'johndoe2']);
+        create('App\User', ['username' => 'janedoe']);
 
-        $results = $this->json('GET', '/api/users', ['name' => 'john']);
+        $results = $this->json('GET', '/api/users', ['username' => 'john']);
 
         $this->assertCount(2, $results->json());
     }
