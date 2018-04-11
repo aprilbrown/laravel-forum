@@ -36,7 +36,7 @@ class DummyDataTableSeeder extends Seeder
             $reply = factory('App\Reply')->create([
                 'thread_id' => $thread->id
             ]);
-            
+
             DB::table('activities')->insert([
                 'user_id' => $reply->user_id,
                 'subject_id' => $reply->id,
@@ -45,7 +45,7 @@ class DummyDataTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
-            
+
             $reply = factory('App\Reply')->create([
                 'thread_id' => $thread->id,
                 'user_id' => $myuser->id
@@ -72,7 +72,7 @@ class DummyDataTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
-            
+
             $reply = factory('App\Reply')->create([
                 'thread_id' => $thread->id,
                 'user_id' => $myuser->id

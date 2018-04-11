@@ -8,6 +8,19 @@
                     <h1>
                         {{ $profileUser->name }}
                     </h1>
+
+                    @can ('update', $profileUser)
+                        <form method="POST" action="{{ route('avatar', $profileUser) }}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <input type="file" name="avatar">
+
+                            <button type="submit" class="btn btn-primary">Upload Avatar</button>
+                        </form>
+                    @endcan
+
+                    @if($profileUser->avatar_path)
+                        <img src="/storage/{{ $profileUser->avatar_path }}" width="50px" height="50px">
+                    @endif
                 </div>
 
                 @forelse ($activities as $date => $activity)
