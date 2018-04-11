@@ -60,8 +60,12 @@ class User extends Authenticatable
         );
     }
 
-    public function avatar()
+    public function getAvatarPathAttribute($avatar)
     {
-        return asset('storage/'.$this->avatar_path ?: 'avatars/default.jpg');
+        if($avatar){
+            return asset('storage/'.$avatar);
+        }else{
+            return asset('images/avatars/default.png');
+        }
     }
 }

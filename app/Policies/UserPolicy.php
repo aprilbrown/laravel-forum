@@ -16,7 +16,7 @@ class UserPolicy
      * @param  \App\User  $signedInUser
      * @return mixed
      */
-    public function update(User $user, User $signedInUser)
+    public function update(User $signedInUser, User $user)
     {
         return $signedInUser->id == $user->id;
     }
