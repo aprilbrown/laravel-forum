@@ -27,6 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token', 'email',
     ];
 
+    protected $casts = [
+        'confirmed' => 'boolean'
+    ];
+
     public function getRouteKeyName()
     {
         return 'username';
@@ -58,6 +62,12 @@ class User extends Authenticatable
             $this->visitedThreadCacheKey($thread),
             \Carbon\Carbon::now()
         );
+    }
+
+    public function confirm()
+    {
+        $this->confirmed = true;
+        $this->save();
     }
 
     public function getAvatarPathAttribute($avatar)
