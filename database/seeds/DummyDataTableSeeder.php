@@ -18,6 +18,7 @@ class DummyDataTableSeeder extends Seeder
             'username' => 'WolfLoverApril',
             'email' => 'wolfloverapril@gmail.com',
             'password' => bcrypt('test'),
+            'confirmed' => true
         ]);
 
         $threads = factory('App\Thread', 3)->create(['user_id' => $myuser->id]);
