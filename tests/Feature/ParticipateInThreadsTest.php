@@ -4,11 +4,11 @@ namespace Tests\Feature;
 
 use Exception;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ParticipateInThreadsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function unauthenticated_users_may_not_add_replies()
