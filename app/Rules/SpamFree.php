@@ -5,6 +5,13 @@ use App\Inspections\Spam;
 
 class SpamFree
 {
+    /**
+     * Determine if the validation rule passes.
+     *
+     * @param  string  $attribute
+     * @param  mixed  $value
+     * @return bool
+     */
     public function passes($attribute, $value)
     {
         try {
@@ -14,9 +21,13 @@ class SpamFree
         }
     }
 
-    //TODO: FOR LARAVEL 5.5
-    // public function message()
-    // {
-        // return 'custom error';
-    // }
+    /**
+     * Get the validation error message.
+     *
+     * @return string
+     */
+    public function message()
+    {
+        return 'Get rid of that Spam.';
+    }
 }
