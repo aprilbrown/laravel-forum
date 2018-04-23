@@ -11,7 +11,7 @@
 
     <div class="panel-body">
         <div class="form-group">
-            <textarea class="form-control" rows="10" v-model="form.body"></textarea>
+            <wysiwyg v-model="form.body"></wysiwyg>
         </div>
     </div>
 

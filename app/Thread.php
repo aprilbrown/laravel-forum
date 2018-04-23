@@ -149,6 +149,17 @@ class Thread extends Model
         return 'slug';
     }
 
+    /**
+     * Access the body attribute.
+     *
+     * @param  string $body
+     * @return string
+     */
+    public function getBodyAttribute($body)
+    {
+        return \Purify::clean($body);
+    }
+
     public function setSlugAttribute($value)
     {
         if(static::whereSlug($slug = str_slug($value))->exists()) {
