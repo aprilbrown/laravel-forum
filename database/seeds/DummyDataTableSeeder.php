@@ -17,7 +17,7 @@ class DummyDataTableSeeder extends Seeder
             'name' => 'April Brown',
             'username' => 'WolfLoverApril',
             'email' => 'wolfloverapril@gmail.com',
-            'password' => bcrypt('test'),
+            'password' => bcrypt('testing'),
             'confirmed' => true
         ]);
 
