@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Thread::class, function ($faker){
+$factory->define(App\Thread::class, function (Faker $faker){
     $title = $faker->sentence;
     return [
         'user_id' => function () {
@@ -19,7 +19,7 @@ $factory->define(App\Thread::class, function ($faker){
     ];
 });
 
-$factory->define(App\Channel::class, function ($faker){
+$factory->define(App\Channel::class, function (Faker $faker){
     $name = $faker->word;
 
     return [
@@ -28,7 +28,7 @@ $factory->define(App\Channel::class, function ($faker){
     ];
 });
 
-$factory->define(App\Reply::class, function ($faker){
+$factory->define(App\Reply::class, function (Faker $faker){
     return [
         'thread_id' => function () {
             return factory('App\Thread')->create()->id;
@@ -40,7 +40,7 @@ $factory->define(App\Reply::class, function ($faker){
     ];
 });
 
-$factory->define(\Illuminate\Notifications\DatabaseNotification::class, function ($faker){
+$factory->define(\Illuminate\Notifications\DatabaseNotification::class, function (Faker $faker){
     return [
         'id' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
         'type' => 'App\Notifications\ThreadWasUpdated',
