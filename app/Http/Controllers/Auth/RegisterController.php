@@ -9,6 +9,7 @@ use App\Mail\PleaseConfirmYourEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -71,7 +72,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'confirmation_token' => str_limit(md5($data['email'] . str_random()), 25, ''),
+            'confirmation_token' => Str::limit(md5($data['email'] . Str::random()), 25, ''),
         ]);
     }
 
