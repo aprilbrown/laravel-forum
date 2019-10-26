@@ -66896,8 +66896,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/aprilbrown/code/personal/laravel-forum/resources/assets/js/app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! /Users/aprilbrown/code/personal/laravel-forum/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! D:\laragon\www\laravel-forum\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! D:\laragon\www\laravel-forum\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
 
 
 /***/ })
