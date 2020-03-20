@@ -16,12 +16,13 @@ class ReadThreadsTest extends TestCase
         $this->thread = create('App\Thread');
     }
 
-    // /** @test */
-    // public function a_user_can_view_all_threads()
-    // {
-    //     $this->get('/threads')
-    //         ->assertSee($this->thread->title);
-    // }
+     /** @test */
+     public function a_user_can_view_all_threads()
+     {
+         $this->markTestSkipped();
+         $this->get('/threads')
+             ->assertSee($this->thread->title);
+     }
 
     /** @test */
     public function a_user_can_read_a_single_thread()
@@ -30,33 +31,35 @@ class ReadThreadsTest extends TestCase
             ->assertSee($this->thread->title);
     }
 
-    // /** @test */
-    // public function a_user_can_filter_threads_according_to_a_channel()
-    // {
-    //     $channel = create('App\Channel');
-    //
-    //     $threadInChannel = create('App\Thread', ['channel_id' => $channel->id]);
-    //
-    //     $threadNotInChannel = create('App\Thread');
-    //
-    //     $this->get('/threads/' . $channel->slug)
-    //         ->assertSee($threadInChannel->title)
-    //         ->assertDontSee($threadNotInChannel->title);
-    // }
+     /** @test */
+     public function a_user_can_filter_threads_according_to_a_channel()
+     {
+         $this->markTestSkipped();
+         $channel = create('App\Channel');
 
-    // /** @test */
-    // public function a_user_can_filter_threads_by_any_username()
-    // {
-    //     $this->signIn(create('App\User', ['username' => 'JohnDoe']));
-    //
-    //     $threadByJohn = create('App\Thread', ['user_id' => auth()->id()]);
-    //
-    //     $threadNotByJohn = create('App\Thread');
-    //
-    //     $this->get('threads?by=JohnDoe')
-    //         ->assertSee($threadByJohn->title)
-    //         ->assertDontSee($threadNotByJohn->title);
-    // }
+         $threadInChannel = create('App\Thread', ['channel_id' => $channel->id]);
+
+         $threadNotInChannel = create('App\Thread');
+
+         $this->get('/threads/' . $channel->slug)
+             ->assertSee($threadInChannel->title)
+             ->assertDontSee($threadNotInChannel->title);
+     }
+
+     /** @test */
+     public function a_user_can_filter_threads_by_any_username()
+     {
+         $this->markTestSkipped();
+         $this->signIn(create('App\User', ['username' => 'JohnDoe']));
+
+         $threadByJohn = create('App\Thread', ['user_id' => auth()->id()]);
+
+         $threadNotByJohn = create('App\Thread');
+
+         $this->get('threads?by=JohnDoe')
+             ->assertSee($threadByJohn->title)
+             ->assertDontSee($threadNotByJohn->title);
+     }
 
     /** @test */
     public function a_user_can_filter_threads_by_popularity()
@@ -98,15 +101,16 @@ class ReadThreadsTest extends TestCase
         $this->assertEquals(1, $response['total']);
     }
 
-   // /** @test */
-   //  function we_record_a_new_visit_each_time_the_thread_is_read()
-   //  {
-   //      $thread = create('App\Thread');
-   //
-   //      $this->assertSame(0, $thread->visits);
-   //
-   //      $this->call('GET', $thread->path());
-   //
-   //      $this->assertEquals(1, $thread->fresh()->visits);
-   //  }
+    /** @test */
+     function we_record_a_new_visit_each_time_the_thread_is_read()
+     {
+         $this->markTestSkipped();
+         $thread = create('App\Thread');
+
+         $this->assertSame(0, $thread->visits);
+
+         $this->call('GET', $thread->path());
+
+         $this->assertEquals(1, $thread->fresh()->visits);
+     }
 }
